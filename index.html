@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function computerPlay(){
+        let randomNumber = Math.floor(Math.random() * 3);
+        let selectedPose = "";
+        switch (randomNumber){
+            case 0:
+                selectedPose = "Rock";
+                break;
+            case 1:
+                selectedPose = "Paper"
+                break;
+            case 2:
+                selectedPose = "Scissor"
+                break;
+            }
+        return selectedPose;
+        
+    }
+    function playRound (playerSelection, computerSelection){
+        let result = "";
+        let playerSelectionUpper = playerSelection.toUpperCase();
+        let computerSelectionUpper = computerSelection.toUpperCase();
+        if (playerSelectionUpper === computerSelectionUpper){
+            result = "Both Players picked the same. Play again!";
+        } else if (((playerSelectionUpper === "ROCK") && (computerSelectionUpper === "PAPER")) || ((playerSelectionUpper === "PAPER") && (computerSelectionUpper === "SCISSOR")) || ((playerSelectionUpper === "SCISSOR") && (computerSelectionUpper === "ROCK"))){
+            result = "Player";
+        } else if (((playerSelectionUpper === "ROCK") && (computerSelectionUpper === "SCISSOR")) || ((playerSelectionUpper === "PAPER") && (computerSelectionUpper === "ROCK")) || ((playerSelectionUpper === "SCISSOR") && (computerSelectionUpper === "PAPER"))){
+            result = "Computer";
+        }
+        return result;
+    }
+    
+    function game(){
+        let playerScore = 0;
+        let computerScore = 0;
+        for (let i = 0; i < 5; i++){
+            let computerSelection = computerPlay();
+            let playerSelection = window.prompt("Rock, Paper or Scissor?");
+            let roundResult = playRound(playerSelection, computerSelection)
+            if (roundResult === "Player"){
+                playerScore++;
+            } else if (roundResult === "Computer"){
+                computerScore++;
+            } else{
+                continue;
+            }
+        }
+
+        if (playerScore > computerScore){
+            console.log("The Player won!");
+        } else if (computerScore > playerScore){
+            console.log("The Computer won!");
+        } else {
+            console.log("It's a tie!");
+        }
+    }
+
+    game();
+    </script>
+</body>
+</html>
